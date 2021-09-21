@@ -1,0 +1,3 @@
+[submodule "ibm-spectrum-scale-install-infra"]
+	path = ibm-spectrum-scale-install-infra
+	url = https://github.com/IBM/ibm-spectrum-scale-install-infra.git

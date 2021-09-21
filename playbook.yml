@@ -1,0 +1,57 @@
+---
+- hosts: scale
+  pre_tasks:
+
+    - name: Test connectivity
+      ping:
+      register: ping_result
+
+    - name: Fail on connection error
+      assert:
+        that: not ping_result.failed
+        fail_msg: Unable to connect with {{ ansible_host }}! Please check the IP and ensure that it is reachable...
+
+    - name: Allow local root logins
+      blockinfile:
+        path: /etc/ssh/sshd_config
+        block: |
+          Match Address {{ ansible_host }}
+          PermitRootLogin without-password
+      notify: reload-sshd
+
+    - name: Add IP alias for generic hostname
+      lineinfile:
+        path: /etc/hosts
+        regexp: '^{{ ansible_host }}(.*)(?<!node1)$'  # negative lookbehind
+        line: '{{ ansible_host }}\1 node1'
+        backrefs: yes
+
+  roles:
+
+    - core/precheck
+    - core/node
+    - core/cluster
+    - core/postcheck
+    - gui/precheck
+    - gui/node
+    - gui/cluster
+    - gui/postcheck
+
+  post_tasks:
+
+    - name: Query node roles
+      shell: "/usr/lpp/mmfs/bin/mmlscluster -Y | grep 'mmlscluster:clusterNode' | grep -v 'HEADER' | cut -d ':' -f 14"
+      register: node_roles
+      changed_when: false
+
+    - name: Enable perfmon role (workaround for generic hostname)
+      command: "/usr/lpp/mmfs/bin/mmchnode --perfmon -N all"
+      when: not node_roles.stdout is search('perfmon')
+
+  handlers:
+
+    - name: reload-sshd
+      service:
+        name: sshd
+        state: reloaded
+
