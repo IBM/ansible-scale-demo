@@ -10,7 +10,7 @@ Sample Ansible® playbooks to deploy a minimal IBM Spectrum Scale™ demo enviro
    $ git clone --recurse-submodules https://github.com/IBM/ansible-scale-demo.git
    ```
 
-  Note that this project repository uses [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules), hence you'll need to add the `--recurse-submodules` option.
+   Note that this project repository uses [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules), hence you'll need to add the `--recurse-submodules` option.
 
 2. Change your working directory to the cloned repository:
 
