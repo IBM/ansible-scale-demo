@@ -57,13 +57,13 @@ Sample Ansible® playbooks to deploy a minimal IBM Spectrum Scale™ demo enviro
 
    You will be prompted to enter the password for your target host.
 
-6. Verify that you can log in to your target host without being prompted for a password:
+6. Verify that you can now log in to your target host without being prompted for a password:
 
    ```shell
    $ ssh cecuser@<your IP address> date
    ```
 
-7. If the previous command succeeds, without prompting you for a password, then you can run the Ansible playbook to deploy the Spectrum Scale demo environment onto your target host:
+7. If the previous command succeeds — without prompting you for a password — then you can run the Ansible playbook to deploy the Spectrum Scale demo environment onto your target host:
 
    ```shell
    $ ansible-playbook -i config playbook.yml
@@ -102,30 +102,32 @@ Sample Ansible® playbooks to deploy a minimal IBM Spectrum Scale™ demo enviro
 
 ## Scope
 
-The file `playbook.yml` is used to bootstrap a minimal Spectrum Scale demo environment:
+The file `playbook.yml` is used to bootstrap a minimal IBM Spectrum Scale™ demo environment:
 
 - Install required packages and their dependencies
 - Create single-node cluster
 - Create and mount file system
 - Initialize Graphical User Interface (GUI)
 
-The file `gpfsperf.yml` is used to create dummy data for generating load on the demo environment.
+The file `gpfsperf.yml` is used to create test data for generating synthetic load on the demo environment.
 
-Playbooks are tailored to work with Linux images hosted on [IBM Solutions Cloud for Enablement and Co-Creation (CECC)](https://www.ibm.com/partnerworld/systems/power/cecc-overview). This includes the following:
+Playbooks are tailored to work with Red Hat® Enterprise Linux® images hosted on [IBM Solutions Cloud for Enablement and Co-Creation (CECC)](https://www.ibm.com/partnerworld/systems/power/cecc-overview). This includes the following characteristics:
 
-- Username , usage of sudo for gaining root privileges
-- Enabling local root logins (avoid sudo-wrapper configuration)
-- Workaround for dynamic hostnames
+- Non-root account for logging in (`ansible_user`), sudo usage for gaining root privileges (`ansible_become`)
+- Permit local root logins to avoid sudo-wrapper configuration (`PermitRootLogin without-password` for local connections)
+- Workarounds for dynamic hostnames (`node1` IP alias, additional invocation of `mmchnode --perfmon`)
 
-The configuration can be adjusted for other platforms as well, including virtual machines on your laptop. You may need to change variable definitions in file `config`, and/or define additional variables. Refer to the official [Spectrum Scale deployment project](https://github.com/IBM/ibm-spectrum-scale-install-infra) for details.
+The configuration can be adjusted to support other platforms as well, including a virtual machine on your laptop. Refer to the [Spectrum Scale FAQ](https://www.ibm.com/docs/en/STXKQY/gpfsclustersfaq.html) for details on supported combinations. You may need to change variable definitions in the `config` file, and/or define additional variables. Refer to the official [Spectrum Scale deployment](https://github.com/IBM/ibm-spectrum-scale-install-infra) project for details.
 
 ## Prerequisites
 
-IBM Spectrum Scale installation packages are required
+IBM Spectrum Scale™ installation packages are required by this project — they need to be downloaded separately. Location of the self-extracting archive is specified with the `scale_install_localpkg_path` variable.
 
-IBM Developer Edition: https://www.ibm.com/products/spectrum-scale → Try free developer edition
+There are different options for obtaining installation packages:
 
-Entitled customers: https://www.ibm.com/support/fixcentral → IBM Spectrum Scale (Software defined storage)
+- A free trial version is available for non-production use. Visit https://www.ibm.com/products/spectrum-scale and click 'Try free developer edition'.
+
+- Customers who have previously purchased Spectrum Scale can obtain entitled versions. Visit https://www.ibm.com/support/fixcentral and search for 'IBM Spectrum Scale (Software defined storage)'.
 
 ## Copyright & License
 
