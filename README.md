@@ -135,7 +135,7 @@ The configuration can be adjusted to support other platforms as well, including 
 
 ## Prerequisites
 
-Ansible® version 2.9 is required to run this project. It can be installed with the following command (see documentation for details):
+Ansible® version 2.9 is required to run this project. It can be installed with the following command (see [documentation](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html) for details):
 
 ```
 pip install ansible==2.9
