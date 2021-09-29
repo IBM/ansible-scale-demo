@@ -87,7 +87,7 @@ Sample Ansible® playbooks to deploy a minimal IBM Spectrum Scale™ demo enviro
    $ ansible-playbook -i config gpfsperf.yml
    ```
 
-   The playbook will run for approximately 20 Minutes.
+   The playbook will run for approximately 1 hour.
 
    While the playbook is running, switch back to your web browser and navigate to Monitoring → Statistics. Click on 'Customize chart' (three dots in the top right corner) and select the following performance metrics:
 
