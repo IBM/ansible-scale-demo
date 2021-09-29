@@ -41,6 +41,8 @@ Sample Ansible® playbooks to deploy a minimal IBM Spectrum Scale™ demo enviro
       ...
       ```
 
+      Note that this is _not_ the SSH user / password you use to log in to your target host. Instead, this is a new account that will be created in the Spectrum Scale GUI, only.
+
 4. Generate a new SSH key pair to be used to log in to your target host:
 
    ```shell
