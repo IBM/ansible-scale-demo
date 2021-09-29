@@ -7,7 +7,7 @@ Sample Ansible® playbooks to deploy a minimal IBM Spectrum Scale™ demo enviro
 1. Clone the repository, including submodules:
 
    ```shell
-   $ git clone --recurse-submodules https://github.com/IBM/ansible-scale-demo.git
+   git clone --recurse-submodules https://github.com/IBM/ansible-scale-demo.git
    ```
 
    Note that this project repository uses [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules), hence you'll need to add the `--recurse-submodules` option.
@@ -15,13 +15,13 @@ Sample Ansible® playbooks to deploy a minimal IBM Spectrum Scale™ demo enviro
 2. Change your working directory to the cloned repository:
 
    ```shell
-   $ cd ansible-scale-demo/
+   cd ansible-scale-demo/
    ```
 
 3. Adjust the configuration:
 
    ```shell
-   $ vi config
+   vi config
    ```
 
    -  Enter the IP address of your target host (top of the file):
@@ -46,7 +46,7 @@ Sample Ansible® playbooks to deploy a minimal IBM Spectrum Scale™ demo enviro
 4. Generate a new SSH key pair to be used to log in to your target host:
 
    ```shell
-   $ ssh-keygen
+   ssh-keygen
    ```
 
    Simply press <kbd>ENTER</kbd> on all prompts to accept default values.
@@ -54,7 +54,7 @@ Sample Ansible® playbooks to deploy a minimal IBM Spectrum Scale™ demo enviro
 5. Authorize the SSH key with your target host:
 
    ```shell
-   $ ssh-copy-id cecuser@<your IP address>
+   ssh-copy-id cecuser@<your IP address>
    ```
 
    You will be prompted to enter the password for your target host.
@@ -62,13 +62,13 @@ Sample Ansible® playbooks to deploy a minimal IBM Spectrum Scale™ demo enviro
 6. Verify that you can now log in to your target host without being prompted for a password:
 
    ```shell
-   $ ssh cecuser@<your IP address> date
+   ssh cecuser@<your IP address> date
    ```
 
 7. If the previous command succeeds — without prompting you for a password — then you can run the Ansible playbook to deploy the Spectrum Scale demo environment onto your target host:
 
    ```shell
-   $ ansible-playbook -i config playbook.yml
+   ansible-playbook -i config playbook.yml
    ```
 
    The playbook will run for approximately 10-15 Minutes.
@@ -86,7 +86,7 @@ Sample Ansible® playbooks to deploy a minimal IBM Spectrum Scale™ demo enviro
 9. Optionally run the `gpfsperf.yml` playbook to generate load on the demo environment:
 
    ```shell
-   $ ansible-playbook -i config gpfsperf.yml
+   ansible-playbook -i config gpfsperf.yml
    ```
 
    The playbook will run for approximately 1 hour.
