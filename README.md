@@ -100,6 +100,12 @@ Sample Ansible® playbooks to deploy a minimal IBM Spectrum Scale™ demo enviro
 
    ![GUI Statistics](img/gui_stats.png)
 
+   Other noteworthy panels to explore:
+
+   - Monitoring → Dashboard
+   - Nodes → select node → View Details
+   - Files → File Systems
+
 ## Scope
 
 The file `playbook.yml` is used to bootstrap a minimal IBM Spectrum Scale™ demo environment:
