@@ -129,6 +129,12 @@ The configuration can be adjusted to support other platforms as well, including 
 
 ## Prerequisites
 
+Ansible® version 2.9 is required to run this project. It can be installed with the following command (see documentation for details):
+
+```
+pip install ansible==2.9
+```
+
 IBM Spectrum Scale™ installation packages are required by this project — they need to be downloaded separately. Location of the self-extracting archive is specified with the `scale_install_localpkg_path` variable.
 
 There are different options for obtaining installation packages:
