@@ -4,8 +4,8 @@
   tasks:
 
     - name: Create dummy data
-      command: /usr/lpp/mmfs/samples/perf/gpfsperf create seq -r 1M -n 5G /mnt/gpfs01/gpfsperf
+      command: /usr/lpp/mmfs/samples/perf/gpfsperf create seq -r 1M -n 4G /mnt/gpfs01/gpfsperf
 
     - name: Read & write dummy data
       shell: /usr/lpp/mmfs/samples/perf/gpfsperf mixrw seq -th 8 -repeat 10 /mnt/gpfs01/gpfsperf && sleep 30
-      loop: "{{ range(25) | list }}"
+      loop: "{{ range(30) | list }}"
