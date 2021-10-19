@@ -35,7 +35,7 @@ Sample Ansible® playbooks to deploy a minimal IBM Spectrum Scale™ demo enviro
    -  Verify that the path to the Spectrum Scale installation package is correct:
 
       ```ini
-      scale_install_localpkg_path=/path/to/Spectrum_Scale_Data_Management-5.1.1.3-ppc64LE-Linux-install
+      scale_install_localpkg_path=/path/to/Spectrum_Scale_Data_Management-5.1.2.0-ppc64LE-Linux-install
       ```
 
    -  Optionally, enter the desired username and password for logging in to the Graphical User Interface (GUI) (bottom of the file):
@@ -97,7 +97,7 @@ Sample Ansible® playbooks to deploy a minimal IBM Spectrum Scale™ demo enviro
 
    The playbook will run for approximately 1 hour.
 
-   While the playbook is running, switch back to your web browser and navigate to Monitoring → Statistics. Click on 'Customize chart' (three dots in the top right corner) and select the following performance metrics:
+   While the playbook is running, switch back to your web browser and navigate to 'Monitoring' → 'Statistics'. Click on 'Customize chart' → 'Edit' (three dots in the top right corner) and select the following performance metrics:
 
    - Resource type: _IBM Spectrum Scale client_
    - Aggregation level: _File System_
@@ -112,7 +112,7 @@ Sample Ansible® playbooks to deploy a minimal IBM Spectrum Scale™ demo enviro
 
    - Monitoring → Dashboard
    - Nodes → select node → View Details
-   - Files → File Systems
+   - Files → File Systems → gpfs01 → View Details
 
 ## Scope
 
