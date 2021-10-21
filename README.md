@@ -35,7 +35,9 @@ Sample Ansible® playbooks to deploy a minimal IBM Spectrum Scale™ demo enviro
    -  Verify that the path to the Spectrum Scale installation package is correct:
 
       ```ini
+      ...
       scale_install_localpkg_path=/path/to/Spectrum_Scale_Data_Management-5.1.2.0-ppc64LE-Linux-install
+      ...
       ```
 
    -  Optionally, enter the desired username and password for logging in to the Graphical User Interface (GUI) (bottom of the file):
@@ -131,7 +133,34 @@ Playbooks are tailored to work with Red Hat® Enterprise Linux® images hosted o
 - Permit local root logins to avoid sudo-wrapper configuration (`PermitRootLogin without-password` for local connections)
 - Workarounds for dynamic hostnames (`node1` IP alias, additional invocation of `mmchnode --perfmon`)
 
-The configuration can be adjusted to support other platforms as well, including a virtual machine on your laptop. Refer to the [Spectrum Scale FAQ](https://www.ibm.com/docs/en/STXKQY/gpfsclustersfaq.html) for details on supported combinations. You may need to change variable definitions in the `config` file, and/or define additional variables. Refer to the official [Spectrum Scale deployment](https://github.com/IBM/ibm-spectrum-scale-install-infra) project for details.
+The configuration can be adjusted to support other platforms as well, including a virtual machine on your laptop...
+
+### Customization
+
+The sample playbooks contained within this project can be adjusted to support different platforms, and they can be extended to provision larger, more complex Spectrum Scale clusters. Refer to the [Spectrum Scale FAQ](https://www.ibm.com/docs/en/STXKQY/gpfsclustersfaq.html) for details on supported combinations. You may need to change variable definitions in the `config` file, add roles to `playbook.yml`, and/or define additional variables. Refer to the [Spectrum Scale deployment](https://github.com/IBM/ibm-spectrum-scale-install-infra) project for details.
+
+Following is a (non-exhaustive) listing of adjustments to consider:
+
+- Support for other platforms, e.g. Intel vs. Power
+
+  The [Spectrum Scale deployment](https://github.com/IBM/ibm-spectrum-scale-install-infra) project supports numerous operating systems and platforms (see [OS support](https://github.com/IBM/ibm-spectrum-scale-install-infra#os-support) for details). In fact, the same playbook can be used to install Spectrum Scale on both, x86_64 and ppc64LE. The Spectrum Scale installation packages, however, are platform dependent — you will need to provide the appropriate installation package for the platform you're deploying to. See [Prerequisites](Prerequisites) for details.
+
+- More cluster nodes
+
+  All hosts listed in the inventory (`config` file) will be provisioned as members of the same Spectrum Scale cluster. Expanding the demo environment to multiple nodes (e.g. for high-availability testing) is as simple as adding more managed hosts.
+
+  One important aspect to consider with multi-node clusters is the assignment of node roles. Here is an exemplary configuration for a three-node cluster:
+
+  ```ini
+  [scale]
+  node1  scale_cluster_quorum=true  scale_cluster_manager=true
+  node2  scale_cluster_quorum=true  scale_cluster_manager=true
+  node3  scale_cluster_quorum=true  scale_cluster_manager=false  scale_gui_collector=true
+  ```
+
+- Additional functionality
+
+  The [Spectrum Scale deployment](https://github.com/IBM/ibm-spectrum-scale-install-infra) project allows for configuring various optional components, such as Cluster Export Services (CES), Active File Management (AFM), File Audit Logging, and Call Home. Additional roles, as well as additional variables need to be defined to enable these functions. There is a comprehensive set of examples available in the [`samples/` directory](https://github.com/IBM/ibm-spectrum-scale-install-infra/tree/master/samples) of the project's Git repository.
 
 ## Prerequisites
 
